@@ -5,14 +5,18 @@ const mongoose = require('mongoose');
 const wilder = require('./routes/wilderRoutes');
 
 // Mango Atlas URL
-const url = 'mongodb+srv://lionel:210592Li@wildermodel.vpg92.mongodb.net/WilderDatabase?retryWrites=true&w=majority';
+const DB = process.env.DATABASE;
 
 // Database Connection
 const connectDB = async () => {
-  await mongoose.connect(url, {
-    autoIndex: true,
-  });
-  console.log('Database connection successful!');
+  try {
+    await mongoose.connect(DB, {
+      autoIndex: true,
+    });
+    console.log('Database connection successful!');
+  } catch (err) {
+    console.error(err.message);
+  }
 };
 connectDB();
 
