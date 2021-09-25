@@ -1,22 +1,17 @@
 import express from 'express';
 
 const mongoose = require('mongoose');
-
-const WilderControl = require('./controllers/WilderControllers');
+const WilderControl = require('./controllers/WilderController');
 
 // Mango Atlas URL
 const url = 'mongodb+srv://lionel:210592Li@wildermodel.vpg92.mongodb.net/WilderDatabase?retryWrites=true&w=majority';
 
 // Database connection
 const connectDB = async () => {
-  try {
-    await mongoose.connect(url, {
-      autoIndex: true,
-    });
-    console.log('Connected to database');
-  } catch (err) {
-    console.error(err);
-  }
+  await mongoose.connect(url, {
+    autoIndex: true,
+  });
+  console.log('Database connection successful!');
 };
 connectDB();
 
@@ -32,4 +27,4 @@ app.delete('/api/wilder/delete/:id', WilderControl.delete);
 
 // Start Server
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server started on ${port}`));
+app.listen(port, () => console.log(`Server started on port ${port}`));
