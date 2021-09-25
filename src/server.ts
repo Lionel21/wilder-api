@@ -20,7 +20,11 @@ connectDB();
 const app = express();
 app.use(express.json()); // Middleware => parsing into JSON format
 
-// Use Routers
+// Use Routes
+app.get('/', (_, res) => {
+  res.status(200).send('Welcome');
+});
+
 app.use('/api/wilder', wilder);
 
 // Running Server
