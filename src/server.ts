@@ -2,7 +2,7 @@ import express from 'express';
 
 require('dotenv').config();
 const mongoose = require('mongoose');
-const WilderControl = require('./controllers/WilderController');
+const wilder = require('./routes/wilderRoutes');
 
 // Mango Atlas URL
 const url = 'mongodb+srv://lionel:210592Li@wildermodel.vpg92.mongodb.net/WilderDatabase?retryWrites=true&w=majority';
@@ -20,11 +20,8 @@ connectDB();
 const app = express();
 app.use(express.json()); // Middleware => parsing into JSON format
 
-// Routers
-app.post('/api/wilder/create', WilderControl.create);
-app.get('/api/wilder/retrieve/:id', WilderControl.retrieve);
-app.put('/api/wilder/update/:id', WilderControl.update);
-app.delete('/api/wilder/delete/:id', WilderControl.delete);
+// Use Routers
+app.use('/api/wilder', wilder);
 
 // Running Server
 const port = process.env.PORT || 5000;
